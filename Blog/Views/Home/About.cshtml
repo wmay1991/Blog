@@ -1,7 +1,27 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "New Post";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<form role="form">
+    <div class="form-group">
+        <label>
+            Post Name
+        </label>
+        <input type="text" id="postName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>
+            Post Tease
+        </label>
+        <textarea id="postTease" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label>
+            Post Body
+        </label>
+        <textarea id="postBody" class="form-control" rows="10"></textarea>
+    </div>
+    <input type="submit" id="submit" class="btn btn-primary" />
+</form>
