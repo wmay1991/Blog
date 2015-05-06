@@ -13,31 +13,31 @@ namespace Blog.Tests.Controllers {
         [TestMethod]
         public void Index() {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            var result = controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
-        public void About() {
+        public void NewPost() {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.About() as ViewResult;
+            var result = controller.NewPost() as ViewResult;
 
             // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            Assert.AreEqual("What do you want to blog about?", result.ViewBag.Message);
         }
 
         [TestMethod]
         public void Contact() {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

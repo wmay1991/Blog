@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Blog.Controllers {
     public class HomeController : Controller {
@@ -10,7 +6,7 @@ namespace Blog.Controllers {
             return View();
         }
 
-        public ActionResult About() {
+        public ActionResult NewPost() {
             ViewBag.Message = "What do you want to blog about?";
 
             return View();
