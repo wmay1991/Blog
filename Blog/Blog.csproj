@@ -80,6 +80,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
@@ -205,6 +206,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505041952081_InitialCreate.cs" />
+    <Compile Include="Migrations\201505041952081_InitialCreate.Designer.cs">
+      <DependentUpon>201505041952081_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -245,7 +251,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\NewPost.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -279,6 +285,21 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201505041952081_InitialCreate.resx">
+      <DependentUpon>201505041952081_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Data\Blog.Data.csproj">
+      <Project>{ab32349e-47f7-4bc4-85a8-39e3716dc005}</Project>
+      <Name>Blog.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blog.Domain\Blog.Domain.csproj">
+      <Project>{f97829f7-aa5f-4fe3-9890-b81f9c403451}</Project>
+      <Name>Blog.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

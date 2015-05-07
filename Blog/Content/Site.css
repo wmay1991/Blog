@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.newPost {
+    max-width: 80%;
+}
+
+.search {
+    max-width: 100%;
+}

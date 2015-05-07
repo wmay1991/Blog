@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Blog.Models
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -10,7 +11,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..."/>
+            <input class="form-control search" type="text" placeholder="Search for..." />
             <span class="input-group-btn">
                 <button class="btn btn-primary" type="button">
                     <span class="glyphicon glyphicon-search"></span>
@@ -20,26 +21,21 @@
         </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
     <div class="col-md-12">
-        <h2>Getting started</h2>
-        <p>
-            In this blog we talk about the general knowledge one needs to start using ASP.NET web MVC
-        </p>
-        <p>
-            <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Read more &raquo;</a>
-        </p>
+        @*@using (@Html.BeginForm("Index", "Home")) {
+            
+            var grid = new WebGrid(Model.BlogPostCollction, canSort: false);
+
+            <div>
+                @grid.GetHtml(rows:
+                    grid.Rows(
+                        grid.Row("Title", "Stud Name"),
+                        grid.Row("Author", "Marks"),
+                        grid.Column("Date", "Section"),
+                        grid.Column("Address", "Address"),
+                        grid.Column("", null, format: @@{<a href="/Home/Edit/?stuId=@item.Id">Edit</a>}),
+                        grid.Column("", null, format: @@{<a href="/Home/Delete/?stuId=@item.Id">Delete</a>})),
+                        mode: WebGridPagerModes.Numeric)
+            </div>
+        }*@
     </div>
-        <div class="col-md-12">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Read more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-12">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Read more &raquo;</a>
-            </p>
-        </div>
-    </div>
+</div>

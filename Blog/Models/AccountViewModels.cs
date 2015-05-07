@@ -5,6 +5,11 @@ namespace Blog.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -41,6 +46,11 @@ namespace Blog.Models
 
     public class ForgotViewModel
     {
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -48,6 +58,11 @@ namespace Blog.Models
 
     public class LoginViewModel
     {
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]
@@ -64,6 +79,10 @@ namespace Blog.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -83,6 +102,11 @@ namespace Blog.Models
 
     public class ResetPasswordViewModel
     {
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -104,6 +128,11 @@ namespace Blog.Models
 
     public class ForgotPasswordViewModel
     {
+
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

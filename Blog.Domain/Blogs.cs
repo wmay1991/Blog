@@ -16,12 +16,13 @@ namespace Blog.Domain
 
         }
 
-        [Key] // Primary Key
-        public int blogId { get; set; }
-
-        public string blogName {get;set;}
-        public string tease {get;set;}
-        public string body {get; set;}
+       [Key] // Primary Key
+       public Guid PostId { get; set; }
+       public string PostTitle {get;set;}
+       public string PostAuthor { get; set; }
+       public DateTime PostDate { get; set; }
+       public string PostTease {get;set;}
+       public string PostBody {get; set;}
 
     }
 }

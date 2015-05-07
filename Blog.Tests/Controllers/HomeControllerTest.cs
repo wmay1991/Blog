@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Blog;
 using Blog.Controllers;
+using Blog.Models;
+using NUnit.Framework;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace Blog.Tests.Controllers {
-    [TestClass]
-    public class HomeControllerTest {
-        [TestMethod]
+    [TestFixture]
+    public class HomeControllerTest
+    {
+        private BlogViewModel _blogViewModel = new BlogViewModel();
+
+        [Test]
         public void Index() {
             // Arrange
             var controller = new HomeController();
@@ -22,7 +24,7 @@ namespace Blog.Tests.Controllers {
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
+        [Test]
         public void NewPost() {
             // Arrange
             var controller = new HomeController();
@@ -34,7 +36,46 @@ namespace Blog.Tests.Controllers {
             Assert.AreEqual("What do you want to blog about?", result.ViewBag.Message);
         }
 
-        [TestMethod]
+        [Test]
+        public void NewPostFailed(){
+
+            var controller = new HomeController();
+            controller.ModelState.AddModelError("Key", "Value");
+            var result = controller.NewPost(_blogViewModel) as ViewResult;
+
+            Assert.AreEqual("NewPost", result.ViewName);
+        }
+
+        [Test]
+        public void NewPostSuccessWithTease() { 
+
+            _blogViewModel = new BlogViewModel();
+            _blogViewModel.PostTitle = "New Post";
+            _blogViewModel.PostAuthor = "Person";
+            _blogViewModel.PostTease = "Wahh wahh wahh";
+            _blogViewModel.PostBody = "Blah Blah Blah Charlie Brown";
+
+            var controller = new HomeController();
+            var result = controller.NewPost(_blogViewModel) as RedirectResult;
+
+            Assert.AreEqual("Index", result.Url);
+        }
+
+        [Test]
+        public void NewPostSuccessWithOutTease() {
+
+            _blogViewModel = new BlogViewModel();
+            _blogViewModel.PostTitle = "New Post";
+            _blogViewModel.PostAuthor = "Person";
+            _blogViewModel.PostBody = "Blah Blah Blah Charlie Brown";
+
+            var controller = new HomeController();
+            var result = controller.NewPost(_blogViewModel) as RedirectResult;
+
+            Assert.AreEqual("Index", result.Url);
+        }
+
+        [Test]
         public void Contact() {
             // Arrange
             var controller = new HomeController();

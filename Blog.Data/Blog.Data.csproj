@@ -47,6 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlogContext.cs" />
+    <Compile Include="Migrations\201505072104237_InitialCreate.cs" />
+    <Compile Include="Migrations\201505072104237_InitialCreate.Designer.cs">
+      <DependentUpon>201505072104237_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +63,11 @@
       <Project>{f97829f7-aa5f-4fe3-9890-b81f9c403451}</Project>
       <Name>Blog.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201505072104237_InitialCreate.resx">
+      <DependentUpon>201505072104237_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
