@@ -4,13 +4,21 @@ using System.Web.Mvc;
 using Blog.Controllers;
 using Blog.Models;
 using NUnit.Framework;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using NUnit.Core;
+using Moq;
 
 namespace Blog.Tests.Controllers {
     [TestFixture]
     public class HomeControllerTest
     {
         private BlogViewModel _blogViewModel = new BlogViewModel();
+        private MockHomeController mockBlogController;
+
+        
+        [SetUp]
+        public void SetUp() {
+            mockBlogController = new MockHomeController();
+        }
 
         [Test]
         public void Index() {
@@ -73,6 +81,33 @@ namespace Blog.Tests.Controllers {
             var result = controller.NewPost(_blogViewModel) as RedirectResult;
 
             Assert.AreEqual("Index", result.Url);
+        }
+
+        [Test]
+        public void AddBlogSuccess()
+        {
+            mockBlogController.PostCreate(new BlogViewModel { PostAuthor = "Person2", PostBody = "This is a blog" , PostTitle = "ASP.NET" })
+               .VerifyAdd(Times.Once);
+        }
+        
+        [Test]
+        public void UpdateBlogRequest()
+        {
+            // Arrange
+            var controller = new HomeController();
+
+            // Act
+            var result = controller.Edit(1) as ViewResult;
+
+            // Assert
+            Assert.IsAssignableFrom(typeof(ViewResult), result);
+        }
+
+        [Test]
+        public void PostUpdateSuccess()
+        {
+            mockBlogController.PostCreate(new BlogViewModel {PostAuthor ="Person2", PostBody= "This is edited"})
+                .VerifyBlogUpdate(Times.Once);
         }
 
         [Test]
