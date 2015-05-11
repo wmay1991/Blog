@@ -9,6 +9,7 @@ namespace Blog.Models {
 
     public class BlogViewModel{
 
+        public Guid id;
         [Required]
         public string PostTitle { get; set; }
         [Required]
