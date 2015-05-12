@@ -5,6 +5,7 @@ using Blog.Domain;
 using Blog.Models;
 using System.Data.Entity;
 using System.Net;
+using System.Linq;
 
 namespace Blog.Controllers
 {
@@ -13,7 +14,6 @@ namespace Blog.Controllers
     {
 
         private BlogContext db = new BlogContext();
-        private BlogContext blogContext;
 
         public HomeController()
         {
@@ -23,14 +23,24 @@ namespace Blog.Controllers
         //For mocking and testing
         public HomeController(BlogContext blogContext)
         {
-            this.blogContext = blogContext;
+            db = blogContext;
         }
 
 
         public ActionResult Index()
         {
-
+            var blogs = db.Blogs.ToList();
+            if (blogs != null)
+            {
+                return View(blogs);
+            }
+         
             return View();
+        }
+
+        public ActionResult Details(int? blogId)
+        {
+            return View(blogId);
         }
 
         public ActionResult NewPost()
@@ -57,12 +67,10 @@ namespace Blog.Controllers
                     PostBody = blogViewModel.PostBody
                 };
 
-                blogViewModel.id = blog.PostId;
+                blogViewModel.BlogId = blog.PostId;
 
-                var newPostDbContext = new BlogContext();
-
-                newPostDbContext.Blogs.Add(blog);
-                newPostDbContext.SaveChanges();
+                db.Blogs.Add(blog);
+                db.SaveChanges();
 
                 return Redirect("Index");
             }
@@ -92,7 +100,8 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var blogToUpdate = db.Blogs.Find(blogViewModel.id);
+                var postId = blogViewModel.PostTitle;
+                var blogToUpdate = db.Blogs.Find(postId);
                 blogToUpdate.PostTitle = blogViewModel.PostTitle;
                 blogToUpdate.PostDate = DateTime.Now;
                 blogToUpdate.PostAuthor = blogViewModel.PostAuthor;

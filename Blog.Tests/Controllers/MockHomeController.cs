@@ -44,7 +44,7 @@ namespace Blog.Tests.Controllers
                 }
                 controller.NewPost(_blogViewModel);
 
-                //mockBlogs.Verify(x => x.Add(It.Is<Blogs>(b => b.PostId == _blogViewModel.id)), times);
+                mockBlogs.Verify(x => x.Add(It.Is<Blogs>(b => b.PostId == _blogViewModel.BlogId)), times);
             }
 
             public void VerfiyEditRequest(Func<Times> times)
@@ -54,17 +54,19 @@ namespace Blog.Tests.Controllers
                 var HomeController = GetMockedController(_mockBlog);
                 var editBlogsResult = HomeController.Edit(3);
 
-                _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.id)), times);
+                _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.BlogId)), times);
 
             }
 
-            //TO Do finish method and write test
             public void VerifyBlogUpdate(Func<Times> times)
             {
                 _mockBlog = new Mock<DbSet<Blogs>>();
                 _mockBlog.Setup(s => s.Find(It.IsAny<int?>())).Returns(new Blogs());
                 var HomeController = GetMockedController(_mockBlog);
+                HomeController.NewPost(_blogViewModel);
+                VerifyAdd(Times.Once);
                 HomeController.Edit(_blogViewModel);
+                _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.BlogId)), times);
 
             }
 

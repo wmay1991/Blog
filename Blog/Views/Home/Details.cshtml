@@ -1,0 +1,14 @@
+﻿@using Blog.Models
+@model BlogViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.PostTitle</h2>
+<h3>By @Model.PostAuthor on @Model.PostDate;</h3>
+<h4>@Model.PostTease</h4>
+<div>
+@Model.PostBody
+</div>
+
+

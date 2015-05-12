@@ -9,7 +9,8 @@ namespace Blog.Models {
 
     public class BlogViewModel{
 
-        public Guid id;
+        public Guid BlogId;
+        public DateTime PostDate;
         [Required]
         public string PostTitle { get; set; }
         [Required]

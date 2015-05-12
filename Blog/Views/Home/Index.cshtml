@@ -1,11 +1,11 @@
 ﻿@using Blog.Models
+@model IEnumerable<Blog.Domain.Blogs>
 @{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
-    <h1>.NET Blog</h1>
-    <p class="lead">This blog was created as a capstone project for the initial .NET boot camp at Manifest Solutions.p>
+
 </div>
 
 <div class="row">
@@ -21,21 +21,18 @@
         </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
     <div class="col-md-12">
-        @*@using (@Html.BeginForm("Index", "Home")) {
-            
-            var grid = new WebGrid(Model.BlogPostCollction, canSort: false);
-
-            <div>
-                @grid.GetHtml(rows:
-                    grid.Rows(
-                        grid.Row("Title", "Stud Name"),
-                        grid.Row("Author", "Marks"),
-                        grid.Column("Date", "Section"),
-                        grid.Column("Address", "Address"),
-                        grid.Column("", null, format: @@{<a href="/Home/Edit/?stuId=@item.Id">Edit</a>}),
-                        grid.Column("", null, format: @@{<a href="/Home/Delete/?stuId=@item.Id">Delete</a>})),
-                        mode: WebGridPagerModes.Numeric)
-            </div>
-        }*@
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-horizontal" }))
+    {
+        if (Model != null)
+        {
+            foreach ( var blogs in Model)
+            {
+                <div>
+                    <h3>@Html.ActionLink(blogs.PostTitle, "Details", new {id = blogs.PostId})</h3>
+                    <h4>Written By @blogs.PostAuthor on @blogs.PostDate</h4>
+                </div>
+            }
+        }
+    }
     </div>
 </div>

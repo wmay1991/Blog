@@ -33,6 +33,19 @@ namespace Blog.Tests.Controllers {
         }
 
         [Test]
+        public void IndexShowBlogs()
+        {
+            // Arrange
+            var controller = new HomeController();
+
+            //Act
+            var result = controller.Index();
+
+            //Assert
+            //Assert.IsNotNull();
+        }
+
+        [Test]
         public void NewPost() {
             // Arrange
             var controller = new HomeController();
@@ -86,7 +99,7 @@ namespace Blog.Tests.Controllers {
         [Test]
         public void AddBlogSuccess()
         {
-            mockBlogController.PostCreate(new BlogViewModel { PostAuthor = "Person2", PostBody = "This is a blog" , PostTitle = "ASP.NET" })
+            mockBlogController.PostCreate(new BlogViewModel { PostAuthor = "Person3", PostBody = "This is a blog111" , PostTitle = "ASP.NET 3.5" })
                .VerifyAdd(Times.Once);
         }
         
@@ -106,7 +119,8 @@ namespace Blog.Tests.Controllers {
         [Test]
         public void PostUpdateSuccess()
         {
-            mockBlogController.PostCreate(new BlogViewModel {PostAuthor ="Person2", PostBody= "This is edited"})
+
+            mockBlogController.PostCreate(new BlogViewModel {PostAuthor ="Person2", PostBody= "This is edited", PostTitle = "HTML5"})
                 .VerifyBlogUpdate(Times.Once);
         }
 
