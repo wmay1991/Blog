@@ -1,4 +1,5 @@
 ﻿@using Blog.Models
+@model BlogViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -8,6 +9,6 @@
     <h4>@Model.PostTease</h4>
     <div class="blogText">@Model.PostBody</div>
     <div class="right-align">
-        @Html.ActionLink("Edit", "Edit", new { blogId = Model.PostId }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Edit", "Edit", new { blogId = Model.BlogId}, new { @class = "btn btn-primary" })
     </div>
 </div>

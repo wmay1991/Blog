@@ -1,0 +1,51 @@
+﻿@using Blog.Models
+@model BlogViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Home", new {}, FormMethod.Post, new {@class = "form-horizontal", role = "form"})){
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PostTitle, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PostTitle, new {@class = "form-control newPost", placeholder = "Please enter your title here...", required = "required"})
+            @Html.ValidationMessageFor(m => m.PostTitle, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PostAuthor, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PostAuthor, new {@class = "form-control", placeholder = "Please enter the author's name here...", required = "required"})
+            @Html.ValidationMessageFor(m => m.PostAuthor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PostTease, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.PostTease, new {@class = "form-control newPost", rows = 3, maxlength = 200, placeholder = "Please enter your teaser here...(Optional)"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PostBody, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.PostBody, new {@class = "form-control newPost", rows = 15, placeholder = "Please enter your content here...", required = "required"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-Primary" />
+            <a href="Index" class="btn btn-danger">Cancel</a>
+        </div>
+    </div>
+    }

@@ -52,7 +52,8 @@ namespace Blog.Tests.Controllers
                 _mockBlog = new Mock<DbSet<Blogs>>();
                 _mockBlog.Setup(s => s.Find(It.IsAny<int?>())).Returns(new Blogs());
                 var HomeController = GetMockedController(_mockBlog);
-                var editBlogsResult = HomeController.Edit(3);
+                Guid blogEditId = new Guid("f687796a-93af-48ed-a561-4bbdd61a2142");
+                var editBlogsResult = HomeController.Edit(blogEditId);
 
                 _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.BlogId)), times);
 

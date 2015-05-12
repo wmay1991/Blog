@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Blog.Domain.Blogs>
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search Resutls</h2>
+
+@foreach (var item in Model)
+{
+    <div>
+        <div>
+            @item.PostTitle
+        </div>
+        <div>
+        </div>
+    </div>
+}

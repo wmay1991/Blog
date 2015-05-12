@@ -108,9 +108,10 @@ namespace Blog.Tests.Controllers {
         {
             // Arrange
             var controller = new HomeController();
+            Guid blogEditId = new Guid("f687796a-93af-48ed-a561-4bbdd61a2142");
 
             // Act
-            var result = controller.Edit(1) as ViewResult;
+            var result = controller.Edit(blogEditId) as ViewResult;
 
             // Assert
             Assert.IsAssignableFrom(typeof(ViewResult), result);
@@ -144,6 +145,23 @@ namespace Blog.Tests.Controllers {
 
             Assert.AreEqual(404, result.StatusCode);
 
+        }
+
+        [Test]
+        public void SearchPageRenders()
+        {
+            var controller = new HomeController();
+            var result = controller.Search(".NET") as ViewResult;
+            Assert.IsAssignableFrom(typeof(ViewResult), result);
+        }
+
+        [Test]
+        public void SearchPageDoesNotRenders()
+        {
+            var controller = new HomeController();
+            string searchText = null;
+            var result = controller.Search(searchText) as HttpStatusCodeResult;
+            Assert.AreEqual(400, result.StatusCode);
         }
     }
 }

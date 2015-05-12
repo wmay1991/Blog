@@ -45,8 +45,9 @@ namespace Blog.Controllers
                 return HttpNotFound();
             }
             var model = db.Blogs.Find(blogId);
-            
-            return View(model);
+            var viewModel = new BlogViewModel(model);
+
+            return View(viewModel);
         }
 
         public ActionResult NewPost()
@@ -83,21 +84,19 @@ namespace Blog.Controllers
             return View("NewPost");
         }
 
-        public ActionResult Contact()
-        {
 
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        public ActionResult Edit(int? blogId)
+        public ActionResult Edit(Guid blogId)
         {
             if(blogId == null )
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            return View(blogId);
+            
+           }
+
+            var model = db.Blogs.Find(blogId);
+            var viewModel = new BlogViewModel(model);
+
+            return View(viewModel);
         }
 
 
@@ -106,7 +105,7 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var postId = blogViewModel.BlogId;
+                
                 var blogToUpdate = db.Blogs.First(b => b.PostId == blogViewModel.BlogId);
                 if (blogToUpdate == null)
                 {
@@ -124,8 +123,20 @@ namespace Blog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-
             return View(blogViewModel);
+        }
+        
+        public ActionResult Search (string searchTerm)
+        {
+            if (searchTerm == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var result = db.Blogs.Where(b => b.PostTitle.Contains(searchTerm));
+            var list =  result.ToList();
+
+            return View(list);
         }
     }
 }
