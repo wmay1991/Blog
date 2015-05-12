@@ -100,8 +100,12 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var postId = blogViewModel.PostTitle;
-                var blogToUpdate = db.Blogs.Find(postId);
+                var postId = blogViewModel.BlogId;
+                var blogToUpdate = db.Blogs.First(b => b.PostId == blogViewModel.BlogId);
+                if (blogToUpdate == null)
+                {
+                    return HttpNotFound();
+                }
                 blogToUpdate.PostTitle = blogViewModel.PostTitle;
                 blogToUpdate.PostDate = DateTime.Now;
                 blogToUpdate.PostAuthor = blogViewModel.PostAuthor;
