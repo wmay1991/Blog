@@ -3,15 +3,14 @@
     ViewBag.Title = "Search";
 }
 
-<h2>Search Resutls</h2>
+<h2>Search Results</h2>
 
 @foreach (var item in Model)
 {
     <div>
         <div>
-            @item.PostTitle
-        </div>
-        <div>
+          <h3> @Html.ActionLink(item.PostTitle, "Details", new { blogId = item.PostId })</h3>
+            <div class="blogText">@item.PostBody</div>
         </div>
     </div>
 }

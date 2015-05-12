@@ -1,0 +1,16 @@
+{
+  "name": "bower install jasmine-core --save-dev",
+  "version": "0.0.0",
+  "homepage": "https://github.com/wmay1991/Blog",
+  "authors": [
+    "Whitney May <maywhitney@rocketmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

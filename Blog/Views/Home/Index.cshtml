@@ -14,9 +14,9 @@
     <div class="col-md-12">
     @using (Html.BeginForm("Search", "Home", FormMethod.Get, new { @class = "form-horizontal" })) {
         <div class="input-group">
-            <input class="form-control search" id ="searchTerm" type="text" placeholder="Search for..." />
+            <input class="form-control search" name="searchTerm" type="text" placeholder="Search for..." />
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" id="searchButton">
+                <button class="btn btn-primary" type="submit" id="searchButton">
                     <span class="glyphicon glyphicon-search"></span>
                     Search
                 </button>

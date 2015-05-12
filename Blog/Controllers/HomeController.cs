@@ -125,7 +125,7 @@ namespace Blog.Controllers
 
             return View(blogViewModel);
         }
-        
+
         public ActionResult Search (string searchTerm)
         {
             if (searchTerm == null)
@@ -133,10 +133,10 @@ namespace Blog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var result = db.Blogs.Where(b => b.PostTitle.Contains(searchTerm));
-            var list =  result.ToList();
+            var result = db.Blogs.Where(b => b.PostTitle.Contains(searchTerm)).ToList();
 
-            return View(list);
+
+            return View(result);
         }
     }
 }
