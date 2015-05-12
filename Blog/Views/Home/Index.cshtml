@@ -28,7 +28,7 @@
             foreach ( var blogs in Model)
             {
                 <div>
-                    <h3>@Html.ActionLink(blogs.PostTitle, "Details", new {id = blogs.PostId})</h3>
+                    <h3>@Html.ActionLink(blogs.PostTitle, "Details", new { blogId = blogs.PostId })</h3>
                     <h4>Written By @blogs.PostAuthor on @blogs.PostDate</h4>
                 </div>
             }

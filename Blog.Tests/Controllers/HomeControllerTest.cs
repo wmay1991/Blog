@@ -125,15 +125,25 @@ namespace Blog.Tests.Controllers {
         }
 
         [Test]
-        public void Contact() {
-            // Arrange
+        public void DetailsRender()
+        {
             var controller = new HomeController();
+            Guid blogId = new Guid("f687796a-93af-48ed-a561-4bbdd61a2142");
+            var result = controller.Details(blogId) as ViewResult;
 
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            Assert.IsAssignableFrom(typeof(ViewResult), result);
 
-            // Assert
-            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void DetailsDoNotRender()
+        {
+            var controller = new HomeController();
+            Guid blogId = Guid.Empty;
+            var result = controller.Details(blogId) as HttpStatusCodeResult;
+
+            Assert.AreEqual(404, result.StatusCode);
+
         }
     }
 }

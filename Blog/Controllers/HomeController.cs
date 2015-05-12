@@ -38,9 +38,15 @@ namespace Blog.Controllers
             return View();
         }
 
-        public ActionResult Details(int? blogId)
+        public ActionResult Details(Guid blogId)
         {
-            return View(blogId);
+            if ( blogId == Guid.Empty)
+            {
+                return HttpNotFound();
+            }
+            var model = db.Blogs.Find(blogId);
+            
+            return View(model);
         }
 
         public ActionResult NewPost()
