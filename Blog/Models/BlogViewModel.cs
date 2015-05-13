@@ -26,8 +26,8 @@ namespace Blog.Models {
 
         }
 
-        public Guid BlogId;
-        public DateTime PostDate;
+        public Guid BlogId { get; set; }
+        public DateTime PostDate { get; set; }
         [Required]
         public string PostTitle { get; set; }
         [Required]
