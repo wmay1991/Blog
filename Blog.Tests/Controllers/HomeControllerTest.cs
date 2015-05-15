@@ -21,6 +21,8 @@ namespace Blog.Tests.Controllers {
             mockBlogController = new MockHomeController();
         }
 
+        //Home Page
+
         [Test]
         public void Index() {
             var controller = new HomeController();
@@ -39,6 +41,8 @@ namespace Blog.Tests.Controllers {
 
             Assert.IsNotNull(result);
         }
+
+        //Add
 
         [Test]
         public void NewPost() {
@@ -95,6 +99,8 @@ namespace Blog.Tests.Controllers {
             
         }
         
+        //Edit
+
         [Test]
         public void UpdateBlogRequest()
         {
@@ -109,13 +115,15 @@ namespace Blog.Tests.Controllers {
         [Test]
         public void PostUpdateSuccess()
         {
-            BlogViewModel vm = new BlogViewModel { BlogId = Guid.NewGuid(), PostAuthor = "Person2", PostBody = "This is edited", PostTitle = "HTML5", PostDate = DateTime.Now };
+            BlogViewModel vm = new BlogViewModel { BlogId = Guid.NewGuid() , PostAuthor = "Person2", PostBody = "This is edited", PostTitle = "HTML5", PostDate = DateTime.Now };
             Blogs blog = new Blogs();
             mockBlogController
                 .PostCreate(vm)
-                //.PostCreateBlog(blog, vm)
+                .PostCreateBlog(blog, vm)
                 .VerifyBlogUpdate(Times.Once);
         }
+
+        //Details
 
         [Test]
         public void DetailsRender()
@@ -138,6 +146,8 @@ namespace Blog.Tests.Controllers {
             Assert.AreEqual(404, result.StatusCode);
 
         }
+
+        //Search
 
         [Test]
         public void SearchPageRenders()

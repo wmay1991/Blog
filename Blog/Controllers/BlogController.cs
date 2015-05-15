@@ -64,7 +64,7 @@ namespace Blog.Controllers
             return View("NewPost");
         }
 
-
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Guid blogId)
         {
             if (blogId == null)
@@ -81,6 +81,7 @@ namespace Blog.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(BlogViewModel blogViewModel)
         {
             if (ModelState.IsValid)

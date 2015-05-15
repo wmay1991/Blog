@@ -45,8 +45,9 @@ namespace Blog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var result = db.Blogs.Where(b => b.PostTitle.Contains(searchTerm)).ToList();
-
+            var result = db.Blogs.Where(b => b.PostTitle.Contains(searchTerm) ||
+                b.PostAuthor.Contains(searchTerm) ||
+                b.PostBody.Contains(searchTerm)).ToList();
 
             return View(result);
         }
