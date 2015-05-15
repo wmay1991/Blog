@@ -17,6 +17,7 @@ namespace Blog.Tests.Controllers
     {
             private bool _withModelError = false;
             private BlogViewModel _blogViewModel = new BlogViewModel();
+            private Blogs _blogs = new Blogs();
             private Mock<DbSet<Blogs>> _mockBlog;
 
             public MockHomeController WithModelError()
@@ -28,6 +29,17 @@ namespace Blog.Tests.Controllers
             public MockHomeController PostCreate(BlogViewModel blogViewModel)
             {
                 this._blogViewModel = blogViewModel;
+                return this;
+            }
+
+            public MockHomeController PostCreateBlog(Blogs blogs, BlogViewModel blogViewModel)
+            {
+                this._blogs.PostId = blogViewModel.BlogId;
+                this._blogs.PostDate = blogViewModel.PostDate;
+                this._blogs.PostTitle = blogViewModel.PostTitle;
+                this._blogs.PostAuthor = blogViewModel.PostAuthor;
+                this._blogs.PostTease = blogViewModel.PostTease;
+                this._blogs.PostBody = blogViewModel.PostBody;
                 return this;
             }
 
@@ -62,20 +74,21 @@ namespace Blog.Tests.Controllers
             public void VerifyBlogUpdate(Func<Times> times)
             {
                 _mockBlog = new Mock<DbSet<Blogs>>();
-                //_mockBlog.Setup(s => s.Find(It.IsAny<int?>())).Returns(new Blogs());
+                _mockBlog.Setup(s => s.Find(It.IsAny<int?>())).Returns(new Blogs());
                 var HomeController = GetMockedController(_mockBlog);
-                VerifyAdd(Times.Once);
+                ////VerifyAdd(Times.Once);
+                //HomeController.NewPost(_blogViewModel);
                 HomeController.Edit(_blogViewModel);
                 _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.BlogId)), times);
 
             }
 
-            private HomeController GetMockedController(Mock<DbSet<Blogs>> mockBlogs)
+            private BlogController GetMockedController(Mock<DbSet<Blogs>> mockBlogs)
             {
                 var mockContext = new Mock<BlogContext>();
                 mockContext.Setup(x => x.Blogs).Returns(mockBlogs.Object);
 
-                return new HomeController(mockContext.Object);
+                return new BlogController(mockContext.Object);
             }
         }
     }

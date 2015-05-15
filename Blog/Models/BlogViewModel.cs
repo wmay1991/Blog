@@ -21,6 +21,16 @@ namespace Blog.Models {
             this.PostBody = blog.PostBody;
         }
 
+        public BlogViewModel(Blogs blog,  BlogViewModel blogvm)
+        {
+            blog.PostId = blogvm.BlogId;
+            blog.PostAuthor = blogvm.PostAuthor;
+            blog.PostTitle = blogvm.PostTitle;
+            blog.PostTease = blogvm.PostTease;
+            blog.PostDate = blogvm.PostDate;
+            blog.PostBody = blogvm.PostBody;
+        }
+
         public BlogViewModel()
         {
 

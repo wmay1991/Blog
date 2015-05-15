@@ -5,10 +5,10 @@
 }
 
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h3>What do you want to blog about?</h3>
 <hr />
 
-@using (Html.BeginForm("NewPost", "Home", new {}, FormMethod.Post, new {@class = "form-horizontal", role = "form"})){
+@using (Html.BeginForm("NewPost", "Blog", new {}, FormMethod.Post, new {@class = "form-horizontal", role = "form"})){
 
     @Html.AntiForgeryToken()
     

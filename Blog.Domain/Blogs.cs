@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Data.Linq.Mapping;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace Blog.Domain
 {
    [Table(Name = "Blogs")]
     public class Blogs
     {
+     
         public Blogs()
         {
 

@@ -6,6 +6,7 @@ using Blog.Models;
 using NUnit.Framework;
 using NUnit.Core;
 using Moq;
+using Blog.Domain;
 
 namespace Blog.Tests.Controllers {
     [TestFixture]
@@ -22,45 +23,35 @@ namespace Blog.Tests.Controllers {
 
         [Test]
         public void Index() {
-            // Arrange
             var controller = new HomeController();
 
-            // Act
             var result = controller.Index() as ViewResult;
 
-            // Assert
             Assert.IsNotNull(result);
         }
 
         [Test]
         public void IndexShowBlogs()
         {
-            // Arrange
             var controller = new HomeController();
 
-            //Act
             var result = controller.Index();
 
-            //Assert
-            //Assert.IsNotNull();
+            Assert.IsNotNull(result);
         }
 
         [Test]
         public void NewPost() {
-            // Arrange
-            var controller = new HomeController();
-
-            // Act
+            var controller = new BlogController();
             var result = controller.NewPost() as ViewResult;
 
-            // Assert
-            Assert.AreEqual("What do you want to blog about?", result.ViewBag.Message);
+            Assert.IsNotNull(result);
         }
 
         [Test]
         public void NewPostFailed(){
 
-            var controller = new HomeController();
+            var controller = new BlogController();
             controller.ModelState.AddModelError("Key", "Value");
             var result = controller.NewPost(_blogViewModel) as ViewResult;
 
@@ -76,10 +67,10 @@ namespace Blog.Tests.Controllers {
             _blogViewModel.PostTease = "Wahh wahh wahh";
             _blogViewModel.PostBody = "Blah Blah Blah Charlie Brown";
 
-            var controller = new HomeController();
-            var result = controller.NewPost(_blogViewModel) as RedirectResult;
+            var controller = new BlogController();
+            var result = controller.NewPost(_blogViewModel) as RedirectToRouteResult;
 
-            Assert.AreEqual("Index", result.Url);
+            Assert.AreEqual("Index", result.RouteValues["action"]);
         }
 
         [Test]
@@ -90,10 +81,10 @@ namespace Blog.Tests.Controllers {
             _blogViewModel.PostAuthor = "Person";
             _blogViewModel.PostBody = "Blah Blah Blah Charlie Brown";
 
-            var controller = new HomeController();
-            var result = controller.NewPost(_blogViewModel) as RedirectResult;
+            var controller = new BlogController();
+            var result = controller.NewPost(_blogViewModel) as RedirectToRouteResult;
 
-            Assert.AreEqual("Index", result.Url);
+            Assert.AreEqual("Index", result.RouteValues["action"]);
         }
 
         [Test]
@@ -101,35 +92,36 @@ namespace Blog.Tests.Controllers {
         {
             mockBlogController.PostCreate(new BlogViewModel { PostAuthor = "Person3", PostBody = "This is a blog111" , PostTitle = "ASP.NET 3.5" })
                .VerifyAdd(Times.Once);
+            
         }
         
         [Test]
         public void UpdateBlogRequest()
         {
-            // Arrange
-            var controller = new HomeController();
-            Guid blogEditId = new Guid("f687796a-93af-48ed-a561-4bbdd61a2142");
+            Guid blogId = new Guid("5D172C7F-FA1F-4C4E-B558-1A46FE251C7E");
 
-            // Act
-            var result = controller.Edit(blogEditId) as ViewResult;
+           var controller = new BlogController();
+           var result = controller.Edit(blogId) as ViewResult;
 
-            // Assert
             Assert.IsAssignableFrom(typeof(ViewResult), result);
         }
 
         [Test]
         public void PostUpdateSuccess()
         {
-
-            mockBlogController.PostCreate(new BlogViewModel {PostAuthor ="Person2", PostBody= "This is edited", PostTitle = "HTML5"})
+            BlogViewModel vm = new BlogViewModel { BlogId = Guid.NewGuid(), PostAuthor = "Person2", PostBody = "This is edited", PostTitle = "HTML5", PostDate = DateTime.Now };
+            Blogs blog = new Blogs();
+            mockBlogController
+                .PostCreate(vm)
+                //.PostCreateBlog(blog, vm)
                 .VerifyBlogUpdate(Times.Once);
         }
 
         [Test]
         public void DetailsRender()
         {
-            var controller = new HomeController();
-            Guid blogId = new Guid("f687796a-93af-48ed-a561-4bbdd61a2142");
+            var controller = new BlogController();
+            Guid blogId = new Guid("5D172C7F-FA1F-4C4E-B558-1A46FE251C7E");
             var result = controller.Details(blogId) as ViewResult;
 
             Assert.IsAssignableFrom(typeof(ViewResult), result);
@@ -139,7 +131,7 @@ namespace Blog.Tests.Controllers {
         [Test]
         public void DetailsDoNotRender()
         {
-            var controller = new HomeController();
+            var controller = new BlogController();
             Guid blogId = Guid.Empty;
             var result = controller.Details(blogId) as HttpStatusCodeResult;
 
