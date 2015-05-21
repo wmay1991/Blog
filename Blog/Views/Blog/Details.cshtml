@@ -3,19 +3,28 @@
 @{
     ViewBag.Title = "Details";
 }
-<div>
+
+<script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="~/Scripts/Blog.js"></script>
+<body>
     <h2>@Model.PostTitle</h2>
-    <h3>By @Model.PostAuthor on @Model.PostDate;</h3>
+    <h3>By @Model.PostAuthor on @Model.PostDate</h3>
     <h4>@Model.PostTease</h4>
     <div class="blogText">@Model.PostBody</div>
-    <div class="right-align">
-        @Html.ActionLink("Edit", "Edit", new { blogId = Model.BlogId}, new { @class = "btn btn-primary" })
+    <button id="btnAddComment" class="btn btn-primary">Add Comment</button>
+
+    @Html.ActionLink("Edit Post", "Edit", new { blogId = Model.BlogId }, new { @class = "btn btn-primary" })
+    <div id="addComment">
+        @Html.Partial("_AddComment", Model.CommentViewModel);
     </div>
-    @Html.Partial("_AddComment", Model.CommentViewModel);
-    @foreach (var comment in Model.BlogComments)
-    {
-        <h5>@comment.CommentAuthor</h5>
-        <h5>@comment.CommentDate</h5>
-        <h5>@comment.CommentBody</h5>
-    }
-</div>
+    <div class="comments">
+        <h4>Comments</h4>
+        @foreach (var comment in Model.BlogComments)
+        {
+            <div class="post-comments">
+                <h5>@comment.CommentAuthor on @comment.CommentDate wrote:</h5>
+                <h5>@comment.CommentBody</h5>
+            </div>
+        }
+    </div>
+</body>

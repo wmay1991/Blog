@@ -3,11 +3,8 @@
 @{
     ViewBag.Title = "Home Page";
 }
-    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/Blog.js"></script>
-
 <div class="jumbotron">
-
+    <h2>Welcome to the .NET Blog</h2>
 </div>
 
 <div class="row">
@@ -34,6 +31,7 @@
                 <div>
                     <h3>@Html.ActionLink(blogs.PostTitle, "Details","Blog", new { blogId = blogs.PostId } , null)</h3>
                     <h4>Written By @blogs.PostAuthor on @blogs.PostDate</h4>
+                    <h5>@blogs.PostTease</h5>
                 </div>
             }
         }

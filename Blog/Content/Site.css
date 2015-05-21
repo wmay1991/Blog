@@ -32,11 +32,42 @@ textarea {
 
 .blogText {
     word-wrap: break-word;
-    margin-bottom:25px;
+    margin-bottom: 25px;
 }
 
-.right-align{
-    text-align:right;
+.right-align {
+    text-align: right;
     padding-top: 10px;
 }
 
+#addComment {
+    padding: 10px;
+    display: none;
+}
+
+.btn-cancel a {
+    color: #000;
+    text-decoration: none;
+}
+
+.post-comments {
+    border: solid 1px lightgray;
+    border-radius: 10px;
+    color: #000000;
+    margin: 20px;
+    background-color: #dddddd;
+}
+
+.post-comments h5 {
+    margin-left: 10px;
+}
+
+.navbar-nav li a , .navbar-brand {
+    margin-top:15px;
+    font-weight:bold;
+    font-size: 18px;
+}
+
+.topOfPage, .comments{
+    padding-top: 20px;
+}

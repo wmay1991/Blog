@@ -32,7 +32,7 @@ namespace Blog.Models
             blog.PostTease = blogvm.PostTease;
             blog.PostDate = blogvm.PostDate;
             blog.PostBody = blogvm.PostBody;
-           
+
         }
 
         public BlogViewModel()
@@ -44,12 +44,17 @@ namespace Blog.Models
 
         public Guid BlogId { get; set; }
         public DateTime PostDate { get; set; }
+
         [Required]
+        [Display(Name = "Post Title")]
         public string PostTitle { get; set; }
         [Required]
+        [Display(Name = "Post Author")]
         public string PostAuthor { get; set; }
+        [Display(Name = "Post Tease")]
         public string PostTease { get; set; }
         [Required]
+        [Display(Name = "Post Body")]
         public string PostBody { get; set; }
 
 

@@ -60,7 +60,7 @@ namespace Blog.Controllers
                 blogViewModel.BlogId = Guid.NewGuid();
                 blogViewModel.PostDate = DateTime.Now;
                 var model = new BlogViewModel(blog, blogViewModel);
-                
+
 
                 db.Blogs.Add(blog);
                 db.SaveChanges();
@@ -96,7 +96,7 @@ namespace Blog.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [ValidateAntiForgeryToken]
+
         public ActionResult Edit(Guid blogId)
         {
             if (blogId == null)
@@ -134,7 +134,7 @@ namespace Blog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-           return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
 
