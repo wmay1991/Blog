@@ -13,26 +13,26 @@ using System.Data.Entity;
 
 namespace Blog.Tests.Controllers
 {
-    internal class MockHomeController
+    internal class MockBlogController
     {
             private bool _withModelError = false;
             private BlogViewModel _blogViewModel = new BlogViewModel();
             private Blogs _blogs = new Blogs();
             private Mock<DbSet<Blogs>> _mockBlog;
 
-            public MockHomeController WithModelError()
+            public MockBlogController WithModelError()
             {
                 this._withModelError = true;
                 return this;
             }
 
-            public MockHomeController PostCreate(BlogViewModel blogViewModel)
+            public MockBlogController PostCreate(BlogViewModel blogViewModel)
             {
                 this._blogViewModel = blogViewModel;
                 return this;
             }
 
-            public MockHomeController PostCreateBlog(Blogs blogs, BlogViewModel blogViewModel)
+            public MockBlogController PostCreateBlog(Blogs blogs, BlogViewModel blogViewModel)
             {
                 this._blogs.PostId = blogViewModel.BlogId;
                 this._blogs.PostDate = blogViewModel.PostDate;
@@ -63,9 +63,9 @@ namespace Blog.Tests.Controllers
             {
                 _mockBlog = new Mock<DbSet<Blogs>>();
                 _mockBlog.Setup(s => s.Find(It.IsAny<int?>())).Returns(new Blogs());
-                var HomeController = GetMockedController(_mockBlog);
-                Guid blogEditId = new Guid("f687796a-93af-48ed-a561-4bbdd61a2142");
-                var editBlogsResult = HomeController.Edit(blogEditId);
+                var BlogController = GetMockedController(_mockBlog);
+                Guid blogEditId = new Guid();
+                var editBlogsResult = BlogController.Edit(blogEditId);
 
                 _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.BlogId)), times);
 
@@ -75,8 +75,8 @@ namespace Blog.Tests.Controllers
             {
                 _mockBlog = new Mock<DbSet<Blogs>>();
                 _mockBlog.Setup(s => s.Find(It.IsAny<int?>())).Returns(new Blogs());
-                var HomeController = GetMockedController(_mockBlog);
-                HomeController.Edit(_blogViewModel);
+                var BlogController = GetMockedController(_mockBlog);
+                BlogController.Edit(_blogViewModel);
                 _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.BlogId)), times);
 
             }

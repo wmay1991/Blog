@@ -211,9 +211,14 @@
     <Compile Include="Migrations\201505041952081_InitialCreate.Designer.cs">
       <DependentUpon>201505041952081_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505181828046_add-migration.cs" />
+    <Compile Include="Migrations\201505181828046_add-migration.Designer.cs">
+      <DependentUpon>201505181828046_add-migration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
+    <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -280,6 +285,7 @@
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Blog\Edit.cshtml" />
     <Content Include="Views\Blog\NewPost.cshtml" />
+    <Content Include="Views\Blog\_AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -294,6 +300,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201505041952081_InitialCreate.resx">
       <DependentUpon>201505041952081_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505181828046_add-migration.resx">
+      <DependentUpon>201505181828046_add-migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -11,4 +11,11 @@
     <div class="right-align">
         @Html.ActionLink("Edit", "Edit", new { blogId = Model.BlogId}, new { @class = "btn btn-primary" })
     </div>
+    @Html.Partial("_AddComment", Model.CommentViewModel);
+    @foreach (var comment in Model.BlogComments)
+    {
+        <h5>@comment.CommentAuthor</h5>
+        <h5>@comment.CommentDate</h5>
+        <h5>@comment.CommentBody</h5>
+    }
 </div>

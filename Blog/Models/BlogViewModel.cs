@@ -6,11 +6,13 @@ using System.Web;
 using Microsoft.Owin.Security;
 using Blog.Domain;
 
-namespace Blog.Models {
+namespace Blog.Models
+{
 
-    public class BlogViewModel{
+    public class BlogViewModel
+    {
 
-
+        public ICollection<BlogComments> BlogComments { get; set; }
         public BlogViewModel(Blogs blog)
         {
             this.BlogId = blog.PostId;
@@ -19,9 +21,10 @@ namespace Blog.Models {
             this.PostTease = blog.PostTease;
             this.PostDate = blog.PostDate;
             this.PostBody = blog.PostBody;
+            this.BlogComments = blog.BlogComments;
         }
 
-        public BlogViewModel(Blogs blog,  BlogViewModel blogvm)
+        public BlogViewModel(Blogs blog, BlogViewModel blogvm)
         {
             blog.PostId = blogvm.BlogId;
             blog.PostAuthor = blogvm.PostAuthor;
@@ -29,12 +32,15 @@ namespace Blog.Models {
             blog.PostTease = blogvm.PostTease;
             blog.PostDate = blogvm.PostDate;
             blog.PostBody = blogvm.PostBody;
+           
         }
 
         public BlogViewModel()
         {
 
         }
+
+        public CommentViewModel CommentViewModel { get; set; }
 
         public Guid BlogId { get; set; }
         public DateTime PostDate { get; set; }
@@ -45,5 +51,7 @@ namespace Blog.Models {
         public string PostTease { get; set; }
         [Required]
         public string PostBody { get; set; }
+
+
     }
 }

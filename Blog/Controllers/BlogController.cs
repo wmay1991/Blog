@@ -32,8 +32,14 @@ namespace Blog.Controllers
             {
                 return HttpNotFound();
             }
-            var model = db.Blogs.Find(blogId);
+            var model = db.Blogs.Include(b => b.BlogComments).First(b => b.PostId == blogId);
+
             var viewModel = new BlogViewModel(model);
+
+            viewModel.CommentViewModel = new CommentViewModel
+                {
+                    BlogId = blogId
+                };
 
             return View(viewModel);
         }
@@ -65,6 +71,32 @@ namespace Blog.Controllers
         }
 
         [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult AddComment(CommentViewModel commentViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var vm = commentViewModel;
+                BlogComments comment = new BlogComments();
+                comment.Blog = vm.Blog;
+                comment.PostId = vm.BlogId;
+                comment.CommentAuthor = vm.CommentAuthor;
+                comment.CommentDate = DateTime.Now;
+                comment.CommentId = Guid.NewGuid();
+                comment.CommentBody = vm.CommentBody;
+
+                db.BlogComments.Add(comment);
+                db.SaveChanges();
+
+                BlogViewModel bvm = new BlogViewModel();
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Guid blogId)
         {
             if (blogId == null)
@@ -86,8 +118,8 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                var blogToUpdate = db.Blogs.First(b => b.PostId == blogViewModel.BlogId);
+                var blogId = blogViewModel.BlogId;
+                var blogToUpdate = db.Blogs.Find(blogId);
                 if (blogToUpdate == null)
                 {
                     return HttpNotFound();

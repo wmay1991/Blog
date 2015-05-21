@@ -1,0 +1,33 @@
+﻿@using Blog.Models
+@model CommentViewModel
+
+@using (Html.BeginForm("AddComment", "Blog", new {}, FormMethod.Post, new {@class = "form-horizontal", role = "form"})){
+
+@Html.AntiForgeryToken()
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="form-group">
+    @Html.HiddenFor(m => m.BlogId)
+    @Html.LabelFor(m => m.CommentBody, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.CommentBody, new { @class = "form-control newPost", placeholder = "Please enter your title here...", required = "required" })
+        @Html.ValidationMessageFor(m => m.CommentBody, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.CommentAuthor, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.CommentAuthor, new { @class = "form-control", placeholder = "Please enter the author's name here...", required = "required" })
+        @Html.ValidationMessageFor(m => m.CommentAuthor, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-Primary" />
+            <a href="Index" class="btn btn-danger">Cancel</a>
+        </div>
+    </div>
+}

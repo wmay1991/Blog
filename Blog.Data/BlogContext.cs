@@ -16,5 +16,6 @@ namespace Blog.Data
             
         }
         public virtual DbSet<Blogs> Blogs { get; set; }
+        public virtual DbSet<BlogComments> BlogComments { get; set; }
     }
 }

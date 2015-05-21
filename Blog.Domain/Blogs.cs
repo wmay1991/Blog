@@ -15,10 +15,10 @@ namespace Blog.Domain
      
         public Blogs()
         {
-
+            this.BlogComments = new HashSet<BlogComments>();
         }
 
-       [Key] // Primary Key
+       [Key] 
        public Guid PostId { get; set; }
        public string PostTitle {get;set;}
        public string PostAuthor { get; set; }
@@ -26,5 +26,23 @@ namespace Blog.Domain
        public string PostTease {get;set;}
        public string PostBody {get; set;}
 
+       public ICollection<BlogComments> BlogComments { get; set; }
+
+
+       public void SetComments(IEnumerable<BlogComments> comments)
+       {
+           var commentsToSet = (comments ?? new List<BlogComments>());
+           AddNewComments(commentsToSet);
+       }
+
+
+       private void AddNewComments(IEnumerable<BlogComments> commentsToSet)
+       {
+           var newComments = commentsToSet.Except(this.BlogComments);
+           foreach (var c in newComments)
+           {
+               this.BlogComments.Add(c);
+           }
+       }
     }
 }
