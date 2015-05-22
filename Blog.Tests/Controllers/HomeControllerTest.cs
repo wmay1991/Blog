@@ -187,27 +187,9 @@ namespace Blog.Tests.Controllers
         [Test]
         public void SearchPageRenders()
         {
-            string searchTerm = "Person1";
-            var blogId = Guid.NewGuid();
-            var existingBlog = new Blogs
-            {
-                PostId = blogId,
-                PostAuthor = "Person2",
-                PostTitle = "Person1",
-                PostBody = "Person",
-            };
+            string searchTerm = "Saturday";
 
-            var mockBlogs = new Mock<DbSet<Blogs>>();
-            mockBlogs.Setup(x => x.Find(blogId)).Returns(existingBlog);
-     
-            //var mockBlogs = new Mock<DbSet<Blogs>>();
-            //mockBlogs.Setup(x => x.Find(blogId)).Returns(existingBlog);
-
-            var mockContext = new Mock<BlogContext>();
-            mockContext.Setup(x => x.Blogs).Returns(mockBlogs.Object);
-
-            var controller = new HomeController(mockContext.Object);
-
+            var controller = new HomeController();
             var result = controller.Search(searchTerm) as ViewResult;
             Assert.IsAssignableFrom(typeof(ViewResult), result);
         }

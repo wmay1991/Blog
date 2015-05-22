@@ -11,7 +11,7 @@ namespace Blog.Data
     public class BlogContext : DbContext
     {
         public BlogContext()
-            : base("BlogContext")
+            : base("Blog")
         {
             
         }
