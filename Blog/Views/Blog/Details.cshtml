@@ -13,7 +13,7 @@
     <div class="blogText">@Model.PostBody</div>
     <button id="btnAddComment" class="btn btn-primary">Add Comment</button>
 
-    @Html.ActionLink("Edit Post", "Edit", new { blogId = Model.BlogId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit Post", "Edit", new { postId = Model.PostId}, new { @class = "btn btn-primary" })
     <div id="addComment">
         @Html.Partial("_AddComment", Model.CommentViewModel);
     </div>

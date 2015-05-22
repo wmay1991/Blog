@@ -15,7 +15,7 @@ namespace Blog.Models
         public ICollection<BlogComments> BlogComments { get; set; }
         public BlogViewModel(Blogs blog)
         {
-            this.BlogId = blog.PostId;
+            this.PostId = blog.PostId;
             this.PostAuthor = blog.PostAuthor;
             this.PostTitle = blog.PostTitle;
             this.PostTease = blog.PostTease;
@@ -26,7 +26,7 @@ namespace Blog.Models
 
         public BlogViewModel(Blogs blog, BlogViewModel blogvm)
         {
-            blog.PostId = blogvm.BlogId;
+            blog.PostId = blogvm.PostId;
             blog.PostAuthor = blogvm.PostAuthor;
             blog.PostTitle = blogvm.PostTitle;
             blog.PostTease = blogvm.PostTease;
@@ -42,7 +42,7 @@ namespace Blog.Models
 
         public CommentViewModel CommentViewModel { get; set; }
 
-        public Guid BlogId { get; set; }
+        public Guid PostId { get; set; }
         public DateTime PostDate { get; set; }
 
         [Required]

@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201505181828046_add-migration.Designer.cs">
       <DependentUpon>201505181828046_add-migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505221327120_addComments.cs" />
+    <Compile Include="Migrations\201505221327120_addComments.Designer.cs">
+      <DependentUpon>201505221327120_addComments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
@@ -306,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505181828046_add-migration.resx">
       <DependentUpon>201505181828046_add-migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505221327120_addComments.resx">
+      <DependentUpon>201505221327120_addComments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
