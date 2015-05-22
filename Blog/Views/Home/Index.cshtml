@@ -1,5 +1,5 @@
 ﻿@using Blog.Models
-@model IEnumerable<Blog.Domain.Blogs>
+@model IEnumerable<Blog.Domain.Posts>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -26,12 +26,12 @@
     {
         if (Model != null)
         {
-            foreach ( var blogs in Model)
+            foreach ( var posts in Model)
             {
                 <div>
-                    <h3>@Html.ActionLink(blogs.PostTitle, "Details","Blog", new { blogId = blogs.PostId } , null)</h3>
-                    <h4>Written By @blogs.PostAuthor on @blogs.PostDate</h4>
-                    <h5>@blogs.PostTease</h5>
+                    <h3>@Html.ActionLink(posts.PostTitle, "Details", "Blog", new { postId = posts.PostId }, null)</h3>
+                    <h4>Written By @posts.PostAuthor on @posts.PostDate</h4>
+                    <h5>@posts.PostTease</h5>
                 </div>
             }
         }

@@ -9,6 +9,19 @@ namespace Blog.Models
 {
     public class CommentViewModel
     {
+        public CommentViewModel(PostComments comment, CommentViewModel vm)
+        {
+            comment.Post = vm.Blog;
+            comment.PostId = vm.PostId;
+            comment.CommentAuthor = vm.CommentAuthor;
+            comment.CommentBody = vm.CommentBody;
+
+        }
+
+        public CommentViewModel()
+        {
+
+        }
 
         public Guid CommentId { get; set; }
         public DateTime CommentDate { get; set; }
@@ -21,7 +34,7 @@ namespace Blog.Models
         [Display(Name = "Comment Body")]
         public string CommentBody { get; set; }
 
-        public Guid BlogId { get; set; }
-        public Blogs Blog { get; set; }
+        public Guid PostId { get; set; }
+        public Posts Blog { get; set; }
     }
 }

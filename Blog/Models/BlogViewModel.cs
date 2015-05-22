@@ -9,40 +9,40 @@ using Blog.Domain;
 namespace Blog.Models
 {
 
-    public class BlogViewModel
+    public class PostViewModel
     {
 
-        public ICollection<BlogComments> BlogComments { get; set; }
-        public BlogViewModel(Blogs blog)
+        public ICollection<PostComments> PostComments { get; set; }
+        public PostViewModel(Posts post)
         {
-            this.BlogId = blog.PostId;
-            this.PostAuthor = blog.PostAuthor;
-            this.PostTitle = blog.PostTitle;
-            this.PostTease = blog.PostTease;
-            this.PostDate = blog.PostDate;
-            this.PostBody = blog.PostBody;
-            this.BlogComments = blog.BlogComments;
+            this.PostId = post.PostId;
+            this.PostAuthor = post.PostAuthor;
+            this.PostTitle = post.PostTitle;
+            this.PostTease = post.PostTease;
+            this.PostDate = post.PostDate;
+            this.PostBody = post.PostBody;
+            this.PostComments = post.BlogComments;
         }
 
-        public BlogViewModel(Blogs blog, BlogViewModel blogvm)
+        public PostViewModel(Posts post, PostViewModel blogvm)
         {
-            blog.PostId = blogvm.BlogId;
-            blog.PostAuthor = blogvm.PostAuthor;
-            blog.PostTitle = blogvm.PostTitle;
-            blog.PostTease = blogvm.PostTease;
-            blog.PostDate = blogvm.PostDate;
-            blog.PostBody = blogvm.PostBody;
+            post.PostId = blogvm.PostId;
+            post.PostAuthor = blogvm.PostAuthor;
+            post.PostTitle = blogvm.PostTitle;
+            post.PostTease = blogvm.PostTease;
+            post.PostDate = blogvm.PostDate;
+            post.PostBody = blogvm.PostBody;
 
         }
 
-        public BlogViewModel()
+        public PostViewModel()
         {
 
         }
 
         public CommentViewModel CommentViewModel { get; set; }
 
-        public Guid BlogId { get; set; }
+        public Guid PostId { get; set; }
         public DateTime PostDate { get; set; }
 
         [Required]

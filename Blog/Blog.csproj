@@ -219,10 +219,6 @@
     <Compile Include="Migrations\201505181909251_AddComments.Designer.cs">
       <DependentUpon>201505181909251_AddComments.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201505221558065_blogCommentsV3.cs" />
-    <Compile Include="Migrations\201505221558065_blogCommentsV3.Designer.cs">
-      <DependentUpon>201505221558065_blogCommentsV3.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlogViewModel.cs" />
@@ -317,9 +313,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505181909251_AddComments.resx">
       <DependentUpon>201505181909251_AddComments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505221558065_blogCommentsV3.resx">
-      <DependentUpon>201505221558065_blogCommentsV3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlogComments.cs" />
-    <Compile Include="Blogs.cs" />
+    <Compile Include="PostComments.cs" />
+    <Compile Include="Posts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 ﻿@using Blog.Models
-@model BlogViewModel
+@model PostViewModel
 @{
     ViewBag.Title = "Details";
 }
@@ -13,13 +13,13 @@
     <div class="blogText">@Model.PostBody</div>
     <button id="btnAddComment" class="btn btn-primary">Add Comment</button>
 
-    @Html.ActionLink("Edit Post", "Edit", new { blogId = Model.BlogId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit Post", "Edit", new { postId = Model.PostId }, new { @class = "btn btn-primary" })
     <div id="addComment">
         @Html.Partial("_AddComment", Model.CommentViewModel);
     </div>
     <div class="comments">
         <h4>Comments</h4>
-        @foreach (var comment in Model.BlogComments)
+        @foreach (var comment in Model.PostComments)
         {
             <div class="post-comments">
                 <h5>@comment.CommentAuthor on @comment.CommentDate wrote:</h5>

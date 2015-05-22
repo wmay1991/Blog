@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blog.Domain.Blogs>
+﻿@model IEnumerable<Blog.Domain.Posts>
 @{
     ViewBag.Title = "Search";
 }
@@ -9,7 +9,7 @@
 {
     <div>
         <div>
-            <h3> @Html.ActionLink(item.PostTitle, "Details", new { blogId = item.PostId })</h3>
+            <h3> @Html.ActionLink(@item.PostTitle,"Details", "Blog", new{ postId = item.PostId } , null)</h3>
             <div class="blogText">@item.PostBody</div>
         </div>
     </div>

@@ -8,14 +8,14 @@ using Blog.Domain;
 
 namespace Blog.Data
 {
-    public class BlogContext : DbContext
+    public class PostContext : DbContext
     {
-        public BlogContext()
-            : base("Blog")
+        public PostContext()
+            : base("Post")
         {
             
         }
-        public virtual DbSet<Blogs> Blogs { get; set; }
-        public virtual DbSet<BlogComments> BlogComments { get; set; }
+        public virtual DbSet<Posts> Posts { get; set; }
+        public virtual DbSet<PostComments> PostComments { get; set; }
     }
 }

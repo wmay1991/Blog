@@ -13,28 +13,28 @@ namespace Blog.Controllers
     public class HomeController : Controller
     {
 
-        private BlogContext db = new BlogContext();
+        private PostContext db = new PostContext();
 
         public HomeController()
         {
-            db = new BlogContext();
+            db = new PostContext();
         }
 
         //For mocking and testing
-        public HomeController(BlogContext blogContext)
+        public HomeController(PostContext postContext)
         {
-            db = blogContext;
+            db = postContext;
         }
 
 
         public ActionResult Index()
         {
-            var blogs = db.Blogs.ToList();
-            if (blogs != null)
+            var post = db.Posts.ToList();
+            if (post != null)
             {
-                return View(blogs);
+                return View(post);
             }
-         
+
             return View();
         }
 
@@ -45,7 +45,7 @@ namespace Blog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var result = db.Blogs.Where(b => b.PostTitle.Contains(searchTerm) ||
+            var result = db.Posts.Where(b => b.PostTitle.Contains(searchTerm) ||
                 b.PostAuthor.Contains(searchTerm) ||
                 b.PostBody.Contains(searchTerm)).ToList();
 

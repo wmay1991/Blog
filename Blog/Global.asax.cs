@@ -19,7 +19,7 @@ namespace Blog
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Database.SetInitializer<BlogContext>(null);
+            Database.SetInitializer<PostContext>(null);
         }
     }
 }

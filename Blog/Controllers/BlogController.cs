@@ -14,31 +14,31 @@ namespace Blog.Controllers
 {
     public class BlogController : Controller
     {
-        private BlogContext db = new BlogContext();
+        private PostContext db = new PostContext();
 
-        public BlogController(BlogContext blogContext)
+        public BlogController(PostContext blogContext)
         {
             db = blogContext;
         }
 
         public BlogController()
         {
-            db = new BlogContext();
+            db = new PostContext();
         }
 
-        public ActionResult Details(Guid blogId)
+        public ActionResult Details(Guid postId)
         {
-            if (blogId == Guid.Empty)
+            if (postId == Guid.Empty)
             {
                 return HttpNotFound();
             }
-            var model = db.Blogs.Find(blogId);
-            var viewModel = new BlogViewModel(model);
+            var model = db.Posts.Find(postId);
+            var viewModel = new PostViewModel(model);
 
             viewModel.CommentViewModel = new CommentViewModel
                {
-                    BlogId = blogId
-                };
+                   PostId = postId
+               };
 
             return View(viewModel);
         }
@@ -50,18 +50,18 @@ namespace Blog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NewPost(BlogViewModel blogViewModel)
+        public ActionResult NewPost(PostViewModel postViewModel)
         {
 
             if (ModelState.IsValid)
             {
-                Blogs blog = new Blogs();
-                blogViewModel.BlogId = Guid.NewGuid();
-                blogViewModel.PostDate = DateTime.Now;
-                var model = new BlogViewModel(blog, blogViewModel);
+                Posts post = new Posts();
+                postViewModel.PostId = Guid.NewGuid();
+                postViewModel.PostDate = DateTime.Now;
+                var model = new PostViewModel(post, postViewModel);
 
 
-                db.Blogs.Add(blog);
+                db.Posts.Add(post);
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
@@ -76,18 +76,13 @@ namespace Blog.Controllers
             if (ModelState.IsValid)
             {
                 var vm = commentViewModel;
-                BlogComments comment = new BlogComments();
-                comment.Blog = vm.Blog;
-                comment.PostId = vm.BlogId;
-                comment.CommentAuthor = vm.CommentAuthor;
+                PostComments comment = new PostComments();
                 comment.CommentDate = DateTime.Now;
                 comment.CommentId = Guid.NewGuid();
-                comment.CommentBody = vm.CommentBody;
+                new CommentViewModel(comment, vm);
 
-                db.BlogComments.Add(comment);
+                db.PostComments.Add(comment);
                 db.SaveChanges();
-
-                BlogViewModel bvm = new BlogViewModel();
 
                 return RedirectToAction("Index", "Home");
             }
@@ -96,16 +91,16 @@ namespace Blog.Controllers
         }
 
 
-        public ActionResult Edit(Guid blogId)
+        public ActionResult Edit(Guid postId)
         {
-            if (blogId == null)
+            if (postId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             }
 
-            var model = db.Blogs.Find(blogId);
-            var viewModel = new BlogViewModel(model);
+            var model = db.Posts.Find(postId);
+            var viewModel = new PostViewModel(model);
 
             return View(viewModel);
         }
@@ -113,19 +108,19 @@ namespace Blog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(BlogViewModel blogViewModel)
+        public ActionResult Edit(PostViewModel postViewModel)
         {
             if (ModelState.IsValid)
             {
-                var blogId = blogViewModel.BlogId;
-                var blogToUpdate = db.Blogs.Find(blogId);
-                if (blogToUpdate == null)
+                var postId = postViewModel.PostId;
+                var postToUpdate = db.Posts.Find(postId);
+                if (postToUpdate == null)
                 {
                     return HttpNotFound();
                 }
-                var model = new BlogViewModel(blogToUpdate, blogViewModel);
+                var model = new PostViewModel(postToUpdate, postViewModel);
 
-                db.Entry(blogToUpdate).State = EntityState.Modified;
+                db.Entry(postToUpdate).State = EntityState.Modified;
                 db.SaveChanges();
             }
             else

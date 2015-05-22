@@ -8,8 +8,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blog.Domain
 {
-   [Table("BlogComments")]
-    public class BlogComments
+    [Table("PostComments")]
+    public class PostComments
     {
         [Key]
         public Guid CommentId { get; set; }
@@ -20,9 +20,9 @@ namespace Blog.Domain
 
         public Guid PostId { get; set; }
         [ForeignKey("PostId")]
-        public virtual Blogs Blog { get; set; }
+        public virtual Posts Post { get; set; }
 
-        public BlogComments()
+        public PostComments()
         {
         }
 
