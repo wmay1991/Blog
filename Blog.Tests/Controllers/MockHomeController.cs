@@ -34,7 +34,7 @@ namespace Blog.Tests.Controllers
 
             public MockBlogController PostCreateBlog(Blogs blogs, BlogViewModel blogViewModel)
             {
-                this._blogs.PostId = blogViewModel.PostId;
+                this._blogs.PostId = blogViewModel.BlogId;
                 this._blogs.PostDate = blogViewModel.PostDate;
                 this._blogs.PostTitle = blogViewModel.PostTitle;
                 this._blogs.PostAuthor = blogViewModel.PostAuthor;
@@ -56,7 +56,7 @@ namespace Blog.Tests.Controllers
                 }
                 controller.NewPost(_blogViewModel);
 
-                mockBlogs.Verify(x => x.Add(It.Is<Blogs>(b => b.PostId == _blogViewModel.PostId)), times);
+                mockBlogs.Verify(x => x.Add(It.Is<Blogs>(b => b.PostId == _blogViewModel.BlogId)), times);
             }
 
             public void VerfiyEditRequest(Func<Times> times)
@@ -67,7 +67,7 @@ namespace Blog.Tests.Controllers
                 Guid blogEditId = new Guid();
                 var editBlogsResult = BlogController.Edit(blogEditId);
 
-                _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.PostId)), times);
+                _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.BlogId)), times);
 
             }
 
@@ -77,7 +77,7 @@ namespace Blog.Tests.Controllers
                 _mockBlog.Setup(s => s.Find(It.IsAny<int?>())).Returns(new Blogs());
                 var BlogController = GetMockedController(_mockBlog);
                 BlogController.Edit(_blogViewModel);
-                _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.PostId)), times);
+                _mockBlog.Verify(x => x.Find(It.Is<Blogs>(b => b.PostId == _blogViewModel.BlogId)), times);
 
             }
 

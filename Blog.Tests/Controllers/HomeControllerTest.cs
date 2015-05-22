@@ -9,7 +9,6 @@ using Moq;
 using Blog.Domain;
 using System.Data.Entity;
 using Blog.Data;
-using System.Collections.Generic;
 
 namespace Blog.Tests.Controllers
 {
@@ -27,6 +26,16 @@ namespace Blog.Tests.Controllers
         }
 
         //Home Page
+
+        [Test]
+        public void Index()
+        {
+            var controller = new HomeController();
+
+            var result = controller.Index() as ViewResult;
+
+            Assert.IsNotNull(result);
+        }
 
         [Test]
         public void IndexShowBlogs()
@@ -96,7 +105,7 @@ namespace Blog.Tests.Controllers
 
             var updatedBlog = new BlogViewModel
             {
-                PostId = blogId,
+                BlogId = blogId,
                 PostAuthor = "Whitney",
             };
 
@@ -120,40 +129,17 @@ namespace Blog.Tests.Controllers
         public void DetailsRender()
         {
             var blogId = Guid.NewGuid();
-
             var existingBlog = new Blogs
             {
                 PostId = blogId,
-                PostAuthor = "Person",
-                PostTitle = "Title",
-                PostDate = DateTime.Now,
-                PostBody = "Read this!",
-            };
-
-            var blogComments = new BlogComments
-            {
-                PostId = blogId,
-                Blog = existingBlog,
-                CommentId = Guid.NewGuid(),
-                CommentAuthor = "Hello",
-                CommentBody = "How are you?",
-                CommentDate = DateTime.Now
             };
 
             var mockBlogs = new Mock<DbSet<Blogs>>();
             mockBlogs.Setup(x => x.Find(blogId)).Returns(existingBlog);
 
-            //var mockComments = new Mock<DbSet<BlogComments>>();
-            //mockComments.Setup(x => x.Find(blogId)).Returns(blogComments);
-
-
             var mockContext = new Mock<BlogContext>();
- 
             mockContext.Setup(x => x.Blogs).Returns(mockBlogs.Object);
-            //mockContext.Setup(x => x.BlogComments).Returns(mockComments.Object);
 
-            //var mockCommnetContext = new Mock<BlogContext>();
-            //mockCommnetContext.Setup(x => x.Blogs).Returns(mockContext.Object);
             var controller = new BlogController(mockContext.Object);
             var result = controller.Details(blogId) as ViewResult;
 
@@ -178,7 +164,6 @@ namespace Blog.Tests.Controllers
         [Test]
         public void SearchPageRenders()
         {
-            string searchTerm = "Person1";
             var blogId = Guid.NewGuid();
             var existingBlog = new Blogs
             {
@@ -190,16 +175,13 @@ namespace Blog.Tests.Controllers
 
             var mockBlogs = new Mock<DbSet<Blogs>>();
             mockBlogs.Setup(x => x.Find(blogId)).Returns(existingBlog);
-     
-            //var mockBlogs = new Mock<DbSet<Blogs>>();
-            //mockBlogs.Setup(x => x.Find(blogId)).Returns(existingBlog);
 
             var mockContext = new Mock<BlogContext>();
             mockContext.Setup(x => x.Blogs).Returns(mockBlogs.Object);
 
             var controller = new HomeController(mockContext.Object);
 
-            var result = controller.Search(searchTerm) as ViewResult;
+            var result = controller.Search("Person1") as ViewResult;
             Assert.IsAssignableFrom(typeof(ViewResult), result);
         }
 

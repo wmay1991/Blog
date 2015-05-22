@@ -26,27 +26,22 @@ namespace Blog.Controllers
             db = new BlogContext();
         }
 
-        public ActionResult Details(Guid postId)
+        public ActionResult Details(Guid blogId)
         {
-
-            if (postId == Guid.Empty)
+            if (blogId == Guid.Empty)
             {
                 return HttpNotFound();
             }
-            //var modelId = db.Blogs.Find(postId).BlogComments.Where()
+            var model = db.Blogs.Include(b => b.BlogComments).First(b => b.PostId == blogId);
 
-            //var model = db.Blogs.Include(c => c.BlogComments).FirstOrDefault(b => b.PostId == postId);
-
-            var model = db.Blogs.Find(postId);
             var viewModel = new BlogViewModel(model);
 
             viewModel.CommentViewModel = new CommentViewModel
                 {
-                    BlogId = postId
+                    BlogId = blogId
                 };
 
             return View(viewModel);
-
         }
 
         public ActionResult NewPost()
@@ -62,7 +57,7 @@ namespace Blog.Controllers
             if (ModelState.IsValid)
             {
                 Blogs blog = new Blogs();
-                blogViewModel.PostId = Guid.NewGuid();
+                blogViewModel.BlogId = Guid.NewGuid();
                 blogViewModel.PostDate = DateTime.Now;
                 var model = new BlogViewModel(blog, blogViewModel);
 
@@ -123,7 +118,7 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var blogId = blogViewModel.PostId;
+                var blogId = blogViewModel.BlogId;
                 var blogToUpdate = db.Blogs.Find(blogId);
                 if (blogToUpdate == null)
                 {
