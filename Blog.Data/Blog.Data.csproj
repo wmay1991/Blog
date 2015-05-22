@@ -57,6 +57,10 @@
     <Compile Include="Migrations\201505181909251_AddComments.Designer.cs">
       <DependentUpon>201505181909251_AddComments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505221423439_AddCommentsVersion2.cs" />
+    <Compile Include="Migrations\201505221423439_AddCommentsVersion2.Designer.cs">
+      <DependentUpon>201505221423439_AddCommentsVersion2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -76,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505181909251_AddComments.resx">
       <DependentUpon>201505181909251_AddComments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505221423439_AddCommentsVersion2.resx">
+      <DependentUpon>201505221423439_AddCommentsVersion2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

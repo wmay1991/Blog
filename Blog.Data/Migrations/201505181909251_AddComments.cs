@@ -7,7 +7,6 @@ namespace Blog.Data.Migrations
     {
         public override void Up()
         {
-            DropPrimaryKey("dbo.Blogs");
             CreateTable(
                 "dbo.BlogComments",
                 c => new
@@ -16,26 +15,19 @@ namespace Blog.Data.Migrations
                         CommentDate = c.DateTime(nullable: false),
                         CommentAuthor = c.String(),
                         CommentBody = c.String(),
-                        BlogId = c.Guid(nullable: false),
+                        PostId = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => t.CommentId)
-                .ForeignKey("dbo.Blogs", t => t.BlogId, cascadeDelete: true)
-                .Index(t => t.BlogId);
-            
-            AddColumn("dbo.Blogs", "BlogId", c => c.Guid(nullable: false));
-            AddPrimaryKey("dbo.Blogs", "BlogId");
-            DropColumn("dbo.Blogs", "PostId");
+                //.ForeignKey("dbo.Blogs", t => t.PostId, cascadeDelete: true
+                .Index(t => t.PostId);
+            AddForeignKey("dbo.BlogComments", "PostId", "dbo.Blogs", "PostId", true);
         }
         
         public override void Down()
         {
-            AddColumn("dbo.Blogs", "PostId", c => c.Guid(nullable: false));
-            DropForeignKey("dbo.BlogComments", "BlogId", "dbo.Blogs");
-            DropIndex("dbo.BlogComments", new[] { "BlogId" });
-            DropPrimaryKey("dbo.Blogs");
-            DropColumn("dbo.Blogs", "BlogId");
+            DropForeignKey("dbo.BlogComments", "PostId", "dbo.Blogs");
+            DropIndex("dbo.BlogComments", new[] { "PostId" });
             DropTable("dbo.BlogComments");
-            AddPrimaryKey("dbo.Blogs", "PostId");
         }
     }
 }
