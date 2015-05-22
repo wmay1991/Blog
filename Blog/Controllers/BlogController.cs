@@ -32,12 +32,11 @@ namespace Blog.Controllers
             {
                 return HttpNotFound();
             }
-            var model = db.Blogs.Include(b => b.BlogComments).First(b => b.PostId == blogId);
-
+            var model = db.Blogs.Find(blogId);
             var viewModel = new BlogViewModel(model);
 
             viewModel.CommentViewModel = new CommentViewModel
-                {
+               {
                     BlogId = blogId
                 };
 

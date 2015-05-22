@@ -17,8 +17,10 @@ namespace Blog.Domain
         public string CommentAuthor { get; set; }
         public string CommentBody { get; set; }
 
+
         public Guid PostId { get; set; }
-        public Blogs Blog { get; set; }
+        [ForeignKey("PostId")]
+        public virtual Blogs Blog { get; set; }
 
         public BlogComments()
         {
