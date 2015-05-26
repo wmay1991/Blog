@@ -48,7 +48,9 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Submit" class="btn btn-Primary" />
-            <a href="Index" class="btn btn-danger">Cancel</a>
+            <button class="btn btn-danger btn-cancel">
+                @Html.ActionLink("Cancel", "Index", "Home")
+            </button>
         </div>
     </div>
 }
