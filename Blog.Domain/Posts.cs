@@ -18,7 +18,7 @@ namespace Blog.Domain
 
         public Posts()
         {
-            this.BlogComments = new HashSet<PostComments>();
+            this.PostComments = new HashSet<PostComments>();
         }
 
         [Key]
@@ -30,7 +30,7 @@ namespace Blog.Domain
         public string PostBody { get; set; }
 
         [a.ForeignKey("PostId")]
-        public virtual ICollection<PostComments> BlogComments { get; set; }
+        public virtual ICollection<PostComments> PostComments { get; set; }
 
 
     }

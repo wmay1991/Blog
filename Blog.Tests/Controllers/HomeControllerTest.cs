@@ -17,7 +17,6 @@ namespace Blog.Tests.Controllers
     [TestFixture]
     public class HomeControllerTest
     {
-        private PostViewModel _blogViewModel = new PostViewModel();
         private MockBlogController mockBlogController;
 
 
@@ -88,24 +87,24 @@ namespace Blog.Tests.Controllers
         [Test]
         public void PostUpdateSuccess()
         {
-            var blogId = Guid.NewGuid();
-            var existingBlog = new Posts
+            var postId = Guid.NewGuid();
+            var existingPost = new Posts
             {
-                PostId = blogId,
+                PostId = postId,
                 PostAuthor = "Person2",
             };
 
             var updatedBlog = new PostViewModel
             {
-                PostId = blogId,
+                PostId = postId,
                 PostAuthor = "Whitney",
             };
 
-            var mockBlogs = new Mock<DbSet<Posts>>();
-            mockBlogs.Setup(x => x.Find(blogId)).Returns(existingBlog);
+            var mockPost = new Mock<DbSet<Posts>>();
+            mockPost.Setup(x => x.Find(postId)).Returns(existingPost);
 
             var mockContext = new Mock<PostContext>();
-            mockContext.Setup(x => x.Posts).Returns(mockBlogs.Object);
+            mockContext.Setup(x => x.Posts).Returns(mockPost.Object);
 
             var controller = new BlogController(mockContext.Object);
             controller.Edit(updatedBlog);
@@ -122,14 +121,14 @@ namespace Blog.Tests.Controllers
         {
             var postId = Guid.NewGuid();
 
-            var existingBlog = new Posts
+            var existingPost = new Posts
             {
                 PostId = postId,
                 PostAuthor = "Person",
                 PostTitle = "Title",
                 PostDate = DateTime.Now,
                 PostBody = "Read this!",
-                BlogComments = new PostComments[] { 
+                PostComments = new PostComments[] { 
                     new PostComments{CommentAuthor = "CommentPerson", 
                         CommentBody = "Great Blog!",
                         CommentDate = DateTime.Now,
@@ -138,12 +137,12 @@ namespace Blog.Tests.Controllers
                 }
             };
 
-            var mockBlogs = new Mock<DbSet<Posts>>();
-            mockBlogs.Setup(x => x.Find(postId)).Returns(existingBlog);
+            var mockPost = new Mock<DbSet<Posts>>();
+            mockPost.Setup(x => x.Find(postId)).Returns(existingPost);
 
 
             var mockContext = new Mock<PostContext>();
-            mockContext.Setup(x => x.Posts).Returns(mockBlogs.Object);
+            mockContext.Setup(x => x.Posts).Returns(mockPost.Object);
 
 
             var controller = new BlogController(mockContext.Object);
@@ -157,8 +156,8 @@ namespace Blog.Tests.Controllers
         public void DetailsDoNotRender()
         {
             var controller = new BlogController();
-            Guid blogId = Guid.Empty;
-            var result = controller.Details(blogId) as HttpStatusCodeResult;
+            Guid postId = Guid.Empty;
+            var result = controller.Details(postId) as HttpStatusCodeResult;
 
             Assert.AreEqual(404, result.StatusCode);
 
@@ -190,7 +189,7 @@ namespace Blog.Tests.Controllers
         public void AddNewComment()
         {
 
-            var existingBlog = new Posts
+            var existingPost = new Posts
             {
                 PostId = Guid.NewGuid(),
                 PostAuthor = "Blogger",
@@ -198,31 +197,31 @@ namespace Blog.Tests.Controllers
 
             var newComment = new PostComments
             {
-                Post = existingBlog,
-                PostId = existingBlog.PostId,
+                Post = existingPost,
+                PostId = existingPost.PostId,
                 CommentId = Guid.NewGuid(),
                 CommentAuthor = "Whitney May",
                 CommentDate = DateTime.Now,
                 CommentBody = "Great blog!",
             };
 
-            var blogWithComments = new CommentViewModel
+            var postWithComments = new CommentViewModel
             {
-                Blog = existingBlog,
+                Post = existingPost,
                 CommentId = Guid.NewGuid(),
                 CommentAuthor = "Whitney May",
                 CommentDate = DateTime.Now,
                 CommentBody = "Great blog!",
             };
 
-            var mockBlogs = new Mock<DbSet<PostComments>>();
-            mockBlogs.Setup(x => x.Find(blogWithComments.PostId)).Returns(newComment);
+            var mockPost = new Mock<DbSet<PostComments>>();
+            mockPost.Setup(x => x.Find(postWithComments.PostId)).Returns(newComment);
 
             var mockContext = new Mock<PostContext>();
-            mockContext.Setup(x => x.PostComments).Returns(mockBlogs.Object);
+            mockContext.Setup(x => x.PostComments).Returns(mockPost.Object);
 
             var controller = new BlogController(mockContext.Object);
-            controller.AddComment(blogWithComments);
+            controller.AddComment(postWithComments);
 
             mockContext.Verify(x => x.SaveChanges());
 

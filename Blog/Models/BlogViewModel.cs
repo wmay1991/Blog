@@ -21,7 +21,7 @@ namespace Blog.Models
             this.PostTease = post.PostTease;
             this.PostDate = post.PostDate;
             this.PostBody = post.PostBody;
-            this.PostComments = post.BlogComments;
+            this.PostComments = post.PostComments;
         }
 
         public PostViewModel(Posts post, PostViewModel blogvm)

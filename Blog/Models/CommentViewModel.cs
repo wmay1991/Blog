@@ -11,7 +11,7 @@ namespace Blog.Models
     {
         public CommentViewModel(PostComments comment, CommentViewModel vm)
         {
-            comment.Post = vm.Blog;
+            comment.Post = vm.Post;
             comment.PostId = vm.PostId;
             comment.CommentAuthor = vm.CommentAuthor;
             comment.CommentBody = vm.CommentBody;
@@ -35,6 +35,6 @@ namespace Blog.Models
         public string CommentBody { get; set; }
 
         public Guid PostId { get; set; }
-        public Posts Blog { get; set; }
+        public Posts Post { get; set; }
     }
 }
