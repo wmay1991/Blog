@@ -43,12 +43,14 @@ namespace Blog.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         public ActionResult NewPost()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult NewPost(PostViewModel postViewModel)
         {
@@ -69,8 +71,10 @@ namespace Blog.Controllers
             return View("NewPost");
         }
 
-        [ValidateAntiForgeryToken]
+
         [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult AddComment(CommentViewModel commentViewModel)
         {
             if (ModelState.IsValid)
@@ -90,7 +94,7 @@ namespace Blog.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        [Authorize]
         public ActionResult Edit(Guid postId)
         {
             if (postId == null)
@@ -107,6 +111,7 @@ namespace Blog.Controllers
 
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(PostViewModel postViewModel)
         {

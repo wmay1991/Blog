@@ -1,4 +1,5 @@
 ﻿@using Blog.Models
+@using Microsoft.AspNet.Identity
 @model PostViewModel
 @{
     ViewBag.Title = "Details";
@@ -11,12 +12,20 @@
     <h3>By @Model.PostAuthor on @Model.PostDate</h3>
     <h4>@Model.PostTease</h4>
     <div class="blogText">@Model.PostBody</div>
-    <button id="btnAddComment" class="btn btn-primary">Add Comment</button>
+    @if (Request.IsAuthenticated)
+    {
+        <button id="btnAddComment" class="btn btn-primary">Add Comment</button>
 
-    @Html.ActionLink("Edit Post", "Edit", new { postId = Model.PostId }, new { @class = "btn btn-primary" })
-    <div id="addComment">
-        @Html.Partial("_AddComment", Model.CommentViewModel);
-    </div>
+        @Html.ActionLink("Edit Post", "Edit", new { postId = Model.PostId }, new { @class = "btn btn-primary" })
+        <div id="addComment">
+            @Html.Partial("_AddComment", Model.CommentViewModel);
+        </div>
+    }
+    else
+    {
+        <div></div>
+        <div>You must be @Html.ActionLink("logged in", "Login", "Account") to comment.</div>
+    }
     <div class="comments">
         <h4>Comments</h4>
         @foreach (var comment in Model.PostComments)

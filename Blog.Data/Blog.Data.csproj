@@ -48,6 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201505261408411_login52615.cs" />
+    <Compile Include="Migrations\201505261408411_login52615.Designer.cs">
+      <DependentUpon>201505261408411_login52615.cs</DependentUpon>
+    </Compile>
     <Compile Include="PostContext.cs" />
     <Compile Include="Migrations\201505072104237_InitialCreate.cs" />
     <Compile Include="Migrations\201505072104237_InitialCreate.Designer.cs">
@@ -90,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505221742301_changeToPost.resx">
       <DependentUpon>201505221742301_changeToPost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505261408411_login52615.resx">
+      <DependentUpon>201505261408411_login52615.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
